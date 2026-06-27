@@ -80,11 +80,15 @@
           <button class="btn-secondary" id="publishBtn">📤 发布并导出</button>
         </div>
       </div>
-      <!-- Middle: 答案密码 -->
+      <!-- Middle: 答案密码 + 待批准请求 -->
       <div class="admin-col">
+        <div class="admin-card" style="border:2px solid var(--accent)">
+          <h4>📩 学生答案请求 <span id="adminPendingCount" style="font-size:.8rem;background:var(--accent);color:#fff;padding:2px 8px;border-radius:10px">0</span></h4>
+          <div id="adminPendingRequests" class="admin-pwd-list"></div>
+        </div>
         <div class="admin-card">
           <h4>🔑 刷题答案密码</h4>
-          <p class="admin-hint" style="margin:0 0 8px">点击学生行可查看该学生今日密码</p>
+          <p class="admin-hint" style="margin:0 0 8px">当前学生：<strong id="adminViewStudent">管理者</strong></p>
           <div id="adminPracticePasswords" class="admin-pwd-list"></div>
         </div>
         <div class="admin-card">

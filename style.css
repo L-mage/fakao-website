@@ -199,6 +199,7 @@ body{
 .admin-section h4{font-size:1rem;margin-bottom:8px}
 .admin-hint{font-size:.82rem!important;color:var(--text-secondary);margin-bottom:10px!important}
 .admin-pwd-list{margin-top:4px}
+.pending-group{font-size:.85rem;padding:6px 8px;margin:4px 0;background:#fffbeb;border-radius:4px;border-left:3px solid var(--accent)}
 .pwd-row{
   display:flex;justify-content:space-between;align-items:center;
   padding:8px 12px;background:#f9fafb;border-radius:6px;margin-bottom:4px
