@@ -209,6 +209,17 @@ body{
 .empty-hint{color:#9ca3af;font-size:.85rem;padding:8px 0}
 #adminStats p{margin-bottom:4px;color:var(--text);font-size:.9rem}
 #adminStats span{font-weight:600}
+.student-login-area{margin-top:16px}
+.add-student-row{display:flex;gap:8px;margin-bottom:12px}
+.student-list{margin-top:8px}
+.student-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 12px;background:#f9fafb;border-radius:6px;margin-bottom:6px
+}
+.student-info{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;font-size:.85rem}
+.student-meta{color:var(--text-secondary);font-size:.78rem}
+.btn-sm{padding:6px 14px!important;font-size:.8rem!important}
+.del-student{background:#fef2f2!important;color:var(--danger)!important;border-color:#fecaca!important}
 /* ===== Recite ===== */
 .recite-content{display:grid;gap:20px;grid-template-columns:1fr 320px;margin-top:16px}
 .recite-card{background:var(--bg-card);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow)}

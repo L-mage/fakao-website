@@ -23,6 +23,13 @@
         <div class="login-error hidden" id="loginError">密码错误</div>
         <button class="btn-primary" id="managerPwdConfirm">确认</button>
       </div>
+      <div class="student-login-area hidden" id="studentLoginArea">
+        <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:12px">使用管理员提供的学生ID和密码登录</p>
+        <input type="text" id="studentIdInput" placeholder="学生ID" class="pwd-input" style="margin-bottom:8px;text-align:center;letter-spacing:2px" maxlength="20">
+        <input type="password" id="studentPwdInput" placeholder="密码" class="pwd-input" style="margin-bottom:8px;text-align:center;letter-spacing:4px" maxlength="10">
+        <div class="login-error hidden" id="studentLoginError"></div>
+        <button class="btn-primary" id="studentLoginConfirm" style="width:100%">登录 →</button>
+      </div>
     </div>
   </div>
 
@@ -241,11 +248,21 @@
       <div class="admin-section">
         <h4>📋 学习者今日学习统计</h4>
         <div id="adminStats">
+          <p>当前学生：<strong id="adminCurrentStudent"></strong></p>
           <p>正在复习的科目：<span id="adminSubjects">未提交</span></p>
           <p>当前阶段：<span id="adminPhase">未提交</span></p>
           <p>刷题已抽：<span id="adminPracticeDrawn">0</span> 题</p>
           <p>法条定位已抽：<span id="adminProvisionDrawn">0</span> 题</p>
         </div>
+      </div>
+      <div class="admin-section">
+        <h4>👥 学生账号管理</h4>
+        <p class="admin-hint">每个学生用自己ID登录，数据互不干扰</p>
+        <div class="add-student-row">
+          <input type="text" id="adminNewStudentId" placeholder="输入新学生ID（如：张三）" class="pwd-input" style="flex:1">
+          <button class="btn-primary" id="adminAddStudentBtn">➕ 添加</button>
+        </div>
+        <div id="adminStudentList" class="student-list"></div>
       </div>
       <div class="admin-section">
         <h4>🔑 今日刷题答案密码</h4>
