@@ -76,7 +76,7 @@
       <button class="nav-btn" data-module="material">📚 机构教材</button>
       <!-- Manager-only buttons shown via JS -->
       <span class="nav-sep" id="navSep"></span>
-      <button class="nav-btn admin-btn hidden" id="adminBtn">📊 管理后台</button>
+      <button class="nav-btn admin-btn hidden" id="adminBtn" data-module="admin">📊 管理后台</button>
       <button class="nav-btn login-switch" id="loginSwitch">🔄 切换身份</button>
     </div>
     <button class="hamburger" id="hamburgerBtn">☰</button>
@@ -86,7 +86,7 @@
 
     <!-- ===================== 刷题 MODULE ===================== -->
     <section id="module-practice" class="module active">
-      <!-- Subject Tabs -->
+      <!-- Subject Tabs (including 民事大综合 as first-level) -->
       <div class="tabs-bar" id="practiceSubjectTabs">
         <button class="tab-btn active" data-subj="刑法">刑法</button>
         <button class="tab-btn" data-subj="民法">民法</button>
@@ -94,13 +94,13 @@
         <button class="tab-btn" data-subj="刑诉">刑事诉讼</button>
         <button class="tab-btn" data-subj="行政法">行政法</button>
         <button class="tab-btn" data-subj="理论法">理论法</button>
+        <button class="tab-btn" data-subj="民事大综合">民事大综合</button>
       </div>
-      <!-- Type Tabs (includes 民事大综合) -->
+      <!-- Type Tabs (no 民事大综合 here) -->
       <div class="tabs-bar type-tabs" id="practiceTypeTabs">
         <button class="tab-btn active" data-type="模拟题">模拟题</button>
         <button class="tab-btn" data-type="真题">真题</button>
         <button class="tab-btn" data-type="每日练习">每日练习</button>
-        <button class="tab-btn" data-type="民事大综合">民事大综合</button>
       </div>
       <!-- Plan & Draw -->
       <div class="plan-panel">
@@ -118,6 +118,38 @@
           </div>
           <button class="btn-primary btn-draw" id="practiceDrawBtn">🎲 抽题</button>
           <button class="btn-secondary btn-draw" id="practiceResetBtn">🔄 重置</button>
+        </div>
+      </div>
+
+      <!-- ===== Manager: Add Question Panel (only visible to manager) ===== -->
+      <div class="editor-panel hidden" id="editorPanel">
+        <div class="editor-toggle" id="editorToggle">
+          <span>✏️ 添加题目到当前科目</span>
+          <span class="editor-arrow">▼</span>
+        </div>
+        <div class="editor-body hidden" id="editorBody">
+          <div class="editor-row">
+            <select id="editorSubject" class="editor-select">
+              <option value="刑法">刑法</option><option value="民法">民法</option>
+              <option value="民事诉讼法">民事诉讼法（民诉）</option>
+              <option value="刑诉法">刑诉法</option>
+              <option value="行政法与行政诉讼法">行政法</option>
+              <option value="理论法">理论法</option>
+              <option value="民事大综合">民事大综合</option>
+            </select>
+            <select id="editorType" class="editor-select">
+              <option value="模拟题">模拟题</option><option value="真题">真题</option>
+              <option value="每日练习">每日练习</option><option value="民事大综合">民事大综合</option>
+            </select>
+          </div>
+          <input type="text" id="editorTitle" class="pwd-input" placeholder="题目名称（如：第一题 / 自定义题）" style="width:100%;margin-bottom:8px">
+          <textarea id="editorCase" class="editor-textarea" placeholder="案情（可留空）" rows="3"></textarea>
+          <textarea id="editorProblems" class="editor-textarea" placeholder="问题（必填）" rows="3"></textarea>
+          <textarea id="editorAnswer" class="editor-textarea" placeholder="参考答案（必填）" rows="5"></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button class="btn-primary" id="editorSaveBtn">💾 保存题目</button>
+            <span id="editorStatus" class="editor-msg"></span>
+          </div>
         </div>
       </div>
       <!-- Practice Area -->
@@ -238,88 +270,68 @@
     </div>
   </div>
 
-  <!-- ====== MANAGER DASHBOARD MODAL ====== -->
-  <div class="modal-overlay hidden" id="adminModal">
-    <div class="modal-card modal-wide">
-      <div class="modal-header">
-        <h3>📊 管理后台</h3>
-        <button class="modal-close" id="adminModalClose">&times;</button>
+    <!-- ===================== 管理后台 MODULE (full page) ===================== -->
+    <section id="module-admin" class="module">
+      <div class="module-header" style="display:flex;justify-content:space-between;align-items:center">
+        <h2>📊 管理后台</h2>
+        <span style="font-size:.85rem;color:var(--text-secondary)">管理者：<strong id="adminCurrentStudent"></strong></span>
       </div>
-      <div class="admin-section">
-        <h4>📋 学习者今日学习统计</h4>
-        <div id="adminStats">
-          <p>当前学生：<strong id="adminCurrentStudent"></strong></p>
-          <p>正在复习的科目：<span id="adminSubjects">未提交</span></p>
-          <p>当前阶段：<span id="adminPhase">未提交</span></p>
-          <p>刷题已抽：<span id="adminPracticeDrawn">0</span> 题</p>
-          <p>法条定位已抽：<span id="adminProvisionDrawn">0</span> 题</p>
+
+      <div class="admin-page-grid">
+        <!-- Left Column -->
+        <div class="admin-col">
+          <div class="admin-card">
+            <h4>👥 学生账号</h4>
+            <div class="add-student-row">
+              <input type="text" id="adminNewStudentId" placeholder="新学生ID" class="pwd-input" style="flex:1">
+              <button class="btn-primary" id="adminAddStudentBtn">➕ 添加</button>
+            </div>
+            <div id="adminStudentList" class="student-list"></div>
+          </div>
+          <div class="admin-card">
+            <h4>🔧 系统设置</h4>
+            <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+              <span style="font-size:.85rem">管理者密码：</span>
+              <input type="text" id="adminManagerPwd" maxlength="10" class="pwd-input" style="flex:1">
+              <button class="btn-primary" id="adminSaveManagerPwd">保存</button>
+            </div>
+            <div style="margin-top:12px">
+              <button class="btn-secondary" id="publishBtn">📤 发布到GitHub（导出+提示）</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle Column -->
+        <div class="admin-col">
+          <div class="admin-card">
+            <h4>📋 学习统计</h4>
+            <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:8px">当前查看学生：<span id="adminViewStudent" style="color:var(--text);font-weight:600"></span></p>
+            <div id="adminStats">
+              <p>科目：<span id="adminSubjects">-</span></p>
+              <p>阶段：<span id="adminPhase">-</span></p>
+              <p>刷题：<span id="adminPracticeDrawn">0</span> 题 | 法条：<span id="adminProvisionDrawn">0</span> 题</p>
+              <p>已解锁答案：<span id="adminUnlockedCount">0</span> 题</p>
+            </div>
+          </div>
+          <div class="admin-card">
+            <h4>🔑 今日刷题答案密码</h4>
+            <div id="adminPracticePasswords" class="admin-pwd-list"></div>
+          </div>
+          <div class="admin-card">
+            <h4>🔑 今日法条定位答案密码</h4>
+            <div id="adminProvisionPasswords" class="admin-pwd-list"></div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="admin-col">
+          <div class="admin-card">
+            <h4>📊 题库统计</h4>
+            <div id="statsContent"></div>
+          </div>
         </div>
       </div>
-      <div class="admin-section">
-        <h4>👥 学生账号管理</h4>
-        <p class="admin-hint">每个学生用自己ID登录，数据互不干扰</p>
-        <div class="add-student-row">
-          <input type="text" id="adminNewStudentId" placeholder="输入新学生ID（如：张三）" class="pwd-input" style="flex:1">
-          <button class="btn-primary" id="adminAddStudentBtn">➕ 添加</button>
-        </div>
-        <div id="adminStudentList" class="student-list"></div>
-      </div>
-      <div class="admin-section">
-        <h4>🔑 今日刷题答案密码</h4>
-        <p class="admin-hint">学习者完成作答题后，将对应题目的密码发给ta</p>
-        <div id="adminPracticePasswords" class="admin-pwd-list">
-          <p class="empty-hint">今日未抽题</p>
-        </div>
-      </div>
-      <div class="admin-section">
-        <h4>🔑 今日法条定位答案密码</h4>
-        <div id="adminProvisionPasswords" class="admin-pwd-list">
-          <p class="empty-hint">今日未抽题</p>
-        </div>
-      </div>
-      <div class="admin-section">
-        <h4>🔧 系统设置</h4>
-        <label>管理者密码：</label>
-        <div style="display:flex;gap:8px;margin-top:4px">
-          <input type="text" id="adminManagerPwd" maxlength="10" class="pwd-input" style="flex:1">
-          <button class="btn-primary" id="adminSaveManagerPwd">保存</button>
-        </div>
-      </div>
-      <div class="admin-section">
-        <h4>✏️ 添加题目</h4>
-        <p class="admin-hint">选择科目和题型，填写案情、问题、参考答案后保存</p>
-        <div class="editor-row">
-          <select id="editorSubject" class="editor-select">
-            <option value="刑法">刑法</option><option value="民法">民法</option>
-            <option value="民事诉讼法">民事诉讼法（民诉）</option>
-            <option value="刑诉法">刑诉法</option>
-            <option value="行政法与行政诉讼法">行政法</option>
-            <option value="理论法">理论法</option>
-          </select>
-          <select id="editorType" class="editor-select">
-            <option value="模拟题">模拟题</option><option value="真题">真题</option>
-            <option value="每日练习">每日练习</option><option value="民事大综合">民事大综合</option>
-          </select>
-        </div>
-        <input type="text" id="editorTitle" class="pwd-input" placeholder="题目名称（如：第一题 / 自定义题）" style="width:100%;margin-bottom:8px">
-        <textarea id="editorCase" class="editor-textarea" placeholder="案情（可留空）" rows="4"></textarea>
-        <textarea id="editorProblems" class="editor-textarea" placeholder="问题（必填）" rows="4"></textarea>
-        <textarea id="editorAnswer" class="editor-textarea" placeholder="参考答案（必填）" rows="6"></textarea>
-        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-          <button class="btn-primary" id="editorSaveBtn">💾 保存题目</button>
-          <button class="btn-secondary" id="publishBtn">📤 发布并导出</button>
-        </div>
-        <div id="editorStatus" class="editor-msg"></div>
-      </div>
-      <div class="admin-section">
-        <h4>📊 数据统计</h4>
-        <div class="tabs-bar stats-tabs" id="statsTabBtns" style="margin-bottom:12px">
-          <button class="tab-btn active" data-tab="stats">题库与学生统计</button>
-        </div>
-        <div id="statsContent"></div>
-      </div>
-    </div>
-  </div>
+    </section>
 
   <footer class="footer"><p>法考主观题督学系统 | 数据仅供学习参考</p></footer>
 
