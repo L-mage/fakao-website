@@ -43,7 +43,7 @@ function initDom(){['loginOverlay','loginLearner','loginManager','managerPwdArea
 'reciteSubjectTabs','todayDate','reciteText','videoSubjectTabs','videoGrid','materialSubjectTabs','materialGrid',
 'answerPwdModal','answerPwdInput','answerPwdError','answerPwdHint','answerPwdCancel','answerPwdConfirm',
 'editorPanel','editorToggle','editorBody','editorSubject','editorType','editorTitle','editorCase','editorProblems','editorAnswer','editorSaveBtn','editorStatus',
-'publishBtn','adminOverlay','adminClose','adminTabs',
+'publishBtn',
 'adminNewStudentId','adminAddStudentBtn','adminStudentList',
 'adminManagerPwd','adminSaveManagerPwd','adminViewStudent',
 'adminPracticePasswords','adminProvisionPasswords','statsContent'].forEach(id=>dom[id]=$(id));}
@@ -107,15 +107,12 @@ function showAnswerPwd(id){puid=id;dom.answerPwdInput.value='';dom.answerPwdErro
 function hideAnswerPwd(){dom.answerPwdModal.classList.add('hidden');puid=null;}
 function confirmAnswerPwd(){const p=dom.answerPwdInput.value.trim();const c=getPwdFor(puid);if(p===c){st.unlocked.add(puid);saveLS();hideAnswerPwd();renderPractice();renderProvision();}else{dom.answerPwdError.classList.remove('hidden');dom.answerPwdInput.value='';dom.answerPwdInput.focus();}}
 
-// ============ ADMIN OVERLAY ============
-function openAdmin(){
+// ============ ADMIN PAGE ============
+function showAdminPage(){
   if(st.tenant!=='manager'){alert('请以管理者身份登录');return;}
-  // Force display
-  dom.adminOverlay.classList.remove('hidden');
-  dom.adminOverlay.style.display='flex';
 
   dom.adminViewStudent.textContent=st.studentId||'管理者';
-  // Refresh passwords from current state
+  // Passwords
   const allPool=getAllPool();
   const pq=st.practiceDrawn.map(id=>allPool.find(q=>q.id===id)).filter(Boolean);
   dom.adminPracticePasswords.innerHTML=pq.length?pq.map(q=>`<div class="pwd-row"><span>${q.title||'题'}（${q.subject}·${q.type}）</span><span class="pwd-code">${getPwdFor(q.id)}</span></div>`).join(''):'<p class="empty-hint">今日未抽题</p>';
@@ -123,17 +120,6 @@ function openAdmin(){
   dom.adminProvisionPasswords.innerHTML=pv.length?pv.map(q=>`<div class="pwd-row"><span>法条定位题</span><span class="pwd-code">${getPwdFor(q.id)}</span></div>`).join(''):'<p class="empty-hint">今日未抽题</p>';
   dom.adminManagerPwd.value=localStorage.getItem('fk_mgr_pwd')||DEFAULT_MGR_PWD;
   renderStudentList();renderStats();
-  // Show accounts tab by default
-  dom.adminTabs.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
-  const firstTab=dom.adminTabs.querySelector('[data-admin="accounts"]');
-  if(firstTab)firstTab.classList.add('active');
-  dom.adminBody.querySelectorAll('.admin-body-section').forEach(s=>s.classList.add('hidden'));
-  const firstSection=dom.adminBody.querySelector('#admin-section-accounts');
-  if(firstSection)firstSection.classList.remove('hidden');
-}
-function closeAdmin(){
-  dom.adminOverlay.style.display='';
-  dom.adminOverlay.classList.add('hidden');
 }
 function closeAdmin(){dom.adminOverlay.classList.add('hidden');}
 
@@ -153,19 +139,12 @@ function renderStudentList(){
 function viewStudentStats(id){
   const p='fk_'+id+'_';const pd=JSON.parse(localStorage.getItem(p+'practice_drawn')||'[]');
   const pvd=JSON.parse(localStorage.getItem(p+'provision_drawn')||'[]');
-  const subjects=JSON.parse(localStorage.getItem(p+'subjects')||'[]');
-  const phase=localStorage.getItem(p+'phase')||'';
   const ul=JSON.parse(localStorage.getItem(p+'unlocked')||'[]');
-  dom.adminViewStudent.textContent=id;
+  dom.adminViewStudent.textContent=id+'（点击学生行查看密码）';
   const practiceItems=pd.map(id=>questionsData.find(q=>q.id===id)).filter(Boolean);
   dom.adminPracticePasswords.innerHTML=practiceItems.length?practiceItems.map(q=>`<div class="pwd-row"><span>${q.title||'题'}（${q.subject}）</span><span class="pwd-code">${getPwdFor(q.id)}</span></div>`).join(''):'<p class="empty-hint">无</p>';
   const provItems=pvd.map(id=>provisionData.find(q=>q.id===id)).filter(Boolean);
   dom.adminProvisionPasswords.innerHTML=provItems.length?provItems.map(q=>`<div class="pwd-row"><span>法条定位题</span><span class="pwd-code">${getPwdFor(q.id)}</span></div>`).join(''):'<p class="empty-hint">无</p>';
-  // Switch to passwords tab
-  dom.adminTabs.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
-  dom.adminTabs.querySelector('[data-admin="passwords"]').classList.add('active');
-  dom.adminBody.querySelectorAll('.admin-body-section').forEach(s=>s.classList.add('hidden'));
-  dom.adminBody.querySelector('#admin-section-passwords').classList.remove('hidden');
 }
 
 function renderStats(){
@@ -264,23 +243,14 @@ function bindEvents(){
   dom.feedbackConfirm.addEventListener('click',confirmFeedback);
   dom.navLinks.addEventListener('click',e=>{
     const b=e.target.closest('.nav-btn[data-module]');if(!b)return;
-    if(b.dataset.module==='admin'){if(st.tenant!=='manager'){alert('请以管理者身份登录');return;}openAdmin();return;}
+    if(b.dataset.module==='admin'){
+      if(st.tenant!=='manager'){alert('请以管理者身份登录');return;}
+      showAdminPage();switchModule('admin');return;
+    }
     switchModule(b.dataset.module);
   });
   dom.hamburgerBtn.addEventListener('click',()=>dom.navLinks.classList.toggle('open'));
-  dom.adminClose.addEventListener('click',closeAdmin);
-  dom.adminOverlay.addEventListener('click',e=>{if(e.target===dom.adminOverlay)closeAdmin();});
   dom.loginSwitch.addEventListener('click',()=>{st=freshState(null);document.querySelectorAll('.fullscreen-overlay').forEach(o=>o.classList.add('hidden'));dom.loginLearner.classList.remove('hidden');dom.loginManager.classList.remove('hidden');dom.studentLoginArea.classList.add('hidden');dom.managerPwdArea.classList.add('hidden');dom.loginError.classList.add('hidden');dom.studentLoginError.classList.add('hidden');dom.studentIdInput.value='';dom.studentPwdInput.value='';showLogin();});
-
-  // Admin tabs
-  dom.adminTabs.addEventListener('click',e=>{
-    const b=e.target.closest('.admin-tab');if(!b)return;
-    dom.adminTabs.querySelectorAll('.admin-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');
-    const sec=b.dataset.admin;
-    dom.adminBody.querySelectorAll('.admin-body-section').forEach(s=>s.classList.add('hidden'));
-    dom.adminBody.querySelector('#admin-section-'+sec).classList.remove('hidden');
-    if(sec==='stats')renderStats();
-  });
 
   // Multi-select for subject + type tabs
   document.querySelectorAll('.tabs-bar').forEach(bar=>{

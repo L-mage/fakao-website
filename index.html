@@ -53,43 +53,25 @@
     </div>
   </div>
 
-  <!-- ====== ADMIN PANEL OVERLAY (for manager only) ====== -->
-  <div class="fullscreen-overlay hidden admin-overlay" id="adminOverlay">
-    <div class="feedback-card admin-panel-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <h3 style="margin:0">📊 管理后台</h3>
-        <button class="modal-close" id="adminClose">&times;</button>
-      </div>
-      <div class="admin-tabs" id="adminTabs">
-        <button class="admin-tab active" data-admin="accounts">👥 学生账号</button>
-        <button class="admin-tab" data-admin="passwords">🔑 答案密码</button>
-        <button class="admin-tab" data-admin="stats">📊 数据统计</button>
-        <button class="admin-tab" data-admin="settings">🔧 系统设置</button>
-      </div>
-      <div class="admin-body" id="adminBody">
-        <!-- 学生账号 -->
-        <div class="admin-body-section" id="admin-section-accounts">
+  <!-- ===================== 管理后台 MODULE (full page) ===================== -->
+  <section id="module-admin" class="module">
+    <div class="module-header" style="display:flex;justify-content:space-between;align-items:center">
+      <h2>📊 管理后台</h2>
+      <span style="font-size:.85rem;color:var(--text-secondary)">管理者：<strong id="adminViewStudent">-</strong></span>
+    </div>
+    <div class="admin-page-grid">
+      <!-- Left: 学生账号 + 系统设置 -->
+      <div class="admin-col">
+        <div class="admin-card">
+          <h4>👥 学生账号</h4>
           <div class="add-student-row">
             <input type="text" id="adminNewStudentId" placeholder="新学生ID" class="pwd-input" style="flex:1">
             <button class="btn-primary" id="adminAddStudentBtn">➕ 添加</button>
           </div>
           <div id="adminStudentList" class="student-list"></div>
-          <p class="admin-hint">💡 双击学生行可查看其详细统计数据</p>
         </div>
-        <!-- 答案密码 -->
-        <div class="admin-body-section hidden" id="admin-section-passwords">
-          <p class="admin-hint">当前学生：<strong id="adminViewStudent">管理者</strong></p>
-          <h4 style="font-size:.9rem;margin:8px 0 4px">📝 刷题密码</h4>
-          <div id="adminPracticePasswords" class="admin-pwd-list"></div>
-          <h4 style="font-size:.9rem;margin:8px 0 4px">📜 法条定位密码</h4>
-          <div id="adminProvisionPasswords" class="admin-pwd-list"></div>
-        </div>
-        <!-- 数据统计 -->
-        <div class="admin-body-section hidden" id="admin-section-stats">
-          <div id="statsContent"></div>
-        </div>
-        <!-- 系统设置 -->
-        <div class="admin-body-section hidden" id="admin-section-settings">
+        <div class="admin-card">
+          <h4>🔧 系统设置</h4>
           <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px">
             <span style="font-size:.88rem">管理者密码：</span>
             <input type="text" id="adminManagerPwd" maxlength="10" class="pwd-input" style="flex:1">
@@ -98,8 +80,27 @@
           <button class="btn-secondary" id="publishBtn">📤 发布并导出</button>
         </div>
       </div>
+      <!-- Middle: 答案密码 -->
+      <div class="admin-col">
+        <div class="admin-card">
+          <h4>🔑 刷题答案密码</h4>
+          <p class="admin-hint" style="margin:0 0 8px">点击学生行可查看该学生今日密码</p>
+          <div id="adminPracticePasswords" class="admin-pwd-list"></div>
+        </div>
+        <div class="admin-card">
+          <h4>🔑 法条定位密码</h4>
+          <div id="adminProvisionPasswords" class="admin-pwd-list"></div>
+        </div>
+      </div>
+      <!-- Right: 数据统计 -->
+      <div class="admin-col">
+        <div class="admin-card">
+          <h4>📊 题库统计 & 学生进度</h4>
+          <div id="statsContent"></div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- ====== TOP NAV ====== -->
   <nav class="top-nav">
