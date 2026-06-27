@@ -285,6 +285,39 @@
           <button class="btn-primary" id="adminSaveManagerPwd">保存</button>
         </div>
       </div>
+      <div class="admin-section">
+        <h4>✏️ 添加题目</h4>
+        <p class="admin-hint">选择科目和题型，填写案情、问题、参考答案后保存</p>
+        <div class="editor-row">
+          <select id="editorSubject" class="editor-select">
+            <option value="刑法">刑法</option><option value="民法">民法</option>
+            <option value="民事诉讼法">民事诉讼法（民诉）</option>
+            <option value="刑诉法">刑诉法</option>
+            <option value="行政法与行政诉讼法">行政法</option>
+            <option value="理论法">理论法</option>
+          </select>
+          <select id="editorType" class="editor-select">
+            <option value="模拟题">模拟题</option><option value="真题">真题</option>
+            <option value="每日练习">每日练习</option><option value="民事大综合">民事大综合</option>
+          </select>
+        </div>
+        <input type="text" id="editorTitle" class="pwd-input" placeholder="题目名称（如：第一题 / 自定义题）" style="width:100%;margin-bottom:8px">
+        <textarea id="editorCase" class="editor-textarea" placeholder="案情（可留空）" rows="4"></textarea>
+        <textarea id="editorProblems" class="editor-textarea" placeholder="问题（必填）" rows="4"></textarea>
+        <textarea id="editorAnswer" class="editor-textarea" placeholder="参考答案（必填）" rows="6"></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+          <button class="btn-primary" id="editorSaveBtn">💾 保存题目</button>
+          <button class="btn-secondary" id="publishBtn">📤 发布并导出</button>
+        </div>
+        <div id="editorStatus" class="editor-msg"></div>
+      </div>
+      <div class="admin-section">
+        <h4>📊 数据统计</h4>
+        <div class="tabs-bar stats-tabs" id="statsTabBtns" style="margin-bottom:12px">
+          <button class="tab-btn active" data-tab="stats">题库与学生统计</button>
+        </div>
+        <div id="statsContent"></div>
+      </div>
     </div>
   </div>
 

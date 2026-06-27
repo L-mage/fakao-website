@@ -220,6 +220,20 @@ body{
 .student-meta{color:var(--text-secondary);font-size:.78rem}
 .btn-sm{padding:6px 14px!important;font-size:.8rem!important}
 .del-student{background:#fef2f2!important;color:var(--danger)!important;border-color:#fecaca!important}
+.editor-row{display:flex;gap:8px;margin-bottom:8px}
+.editor-select{flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:.9rem;font-family:inherit;background:#fff;cursor:pointer}
+.editor-textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:.88rem;font-family:inherit;resize:vertical;line-height:1.6;margin-bottom:6px}
+.editor-textarea:focus{outline:none;border-color:var(--primary)}
+.editor-msg{margin-top:8px;font-size:.85rem;padding:8px 12px;border-radius:6px}
+.editor-msg.ok{background:#d1fae5;color:#065f46}
+.editor-msg.err{background:#fef2f2;color:var(--danger)}
+.student-progress{width:100%;font-size:.78rem;color:var(--text-secondary);margin-top:2px}
+.stats-table-wrap{overflow-x:auto}
+.stats-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:600px}
+.stats-table th,.stats-table td{padding:6px 10px;border:1px solid var(--border);text-align:center}
+.stats-table th{background:#f9fafb;font-weight:600}
+.stats-table tr:nth-child(even){background:#f9fafb}
+.cust-badge{font-size:.7rem;color:#9d174d;background:#fce7f3;padding:1px 5px;border-radius:4px;margin-left:4px}
 /* ===== Recite ===== */
 .recite-content{display:grid;gap:20px;grid-template-columns:1fr 320px;margin-top:16px}
 .recite-card{background:var(--bg-card);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow)}
