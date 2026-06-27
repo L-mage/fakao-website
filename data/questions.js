@@ -105,7 +105,7 @@ const questionsData = [
   },
   {
     "id": 11,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-1",
     "score": 36,
@@ -115,7 +115,7 @@ const questionsData = [
   },
   {
     "id": 12,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-2",
     "score": 36,
@@ -125,7 +125,7 @@ const questionsData = [
   },
   {
     "id": 13,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-3",
     "score": 36,
@@ -135,7 +135,7 @@ const questionsData = [
   },
   {
     "id": 14,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-4",
     "score": 36,
@@ -145,7 +145,7 @@ const questionsData = [
   },
   {
     "id": 15,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-5",
     "score": 36,
@@ -155,7 +155,7 @@ const questionsData = [
   },
   {
     "id": 16,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-6",
     "score": 36,
@@ -165,7 +165,7 @@ const questionsData = [
   },
   {
     "id": 17,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-7",
     "score": 36,
@@ -175,7 +175,7 @@ const questionsData = [
   },
   {
     "id": 18,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-8",
     "score": 36,
@@ -185,7 +185,7 @@ const questionsData = [
   },
   {
     "id": 19,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-9",
     "score": 36,
@@ -195,7 +195,7 @@ const questionsData = [
   },
   {
     "id": 20,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-10",
     "score": 36,
@@ -205,7 +205,7 @@ const questionsData = [
   },
   {
     "id": 21,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-11",
     "score": 36,
@@ -215,7 +215,7 @@ const questionsData = [
   },
   {
     "id": 22,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-12",
     "score": 36,
@@ -225,7 +225,7 @@ const questionsData = [
   },
   {
     "id": 23,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-13",
     "score": 36,
@@ -235,7 +235,7 @@ const questionsData = [
   },
   {
     "id": 24,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-14",
     "score": 36,
@@ -245,7 +245,7 @@ const questionsData = [
   },
   {
     "id": 25,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-15",
     "score": 36,
@@ -255,7 +255,7 @@ const questionsData = [
   },
   {
     "id": 26,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-16",
     "score": 36,
@@ -265,7 +265,7 @@ const questionsData = [
   },
   {
     "id": 27,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-17",
     "score": 36,
@@ -275,7 +275,7 @@ const questionsData = [
   },
   {
     "id": 28,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-18",
     "score": 36,
@@ -285,7 +285,7 @@ const questionsData = [
   },
   {
     "id": 29,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-19",
     "score": 36,
@@ -295,7 +295,7 @@ const questionsData = [
   },
   {
     "id": 30,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-20",
     "score": 36,
@@ -305,7 +305,7 @@ const questionsData = [
   },
   {
     "id": 31,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-21",
     "score": 36,
@@ -315,7 +315,7 @@ const questionsData = [
   },
   {
     "id": 32,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-22",
     "score": 36,
@@ -325,7 +325,7 @@ const questionsData = [
   },
   {
     "id": 33,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-23",
     "score": 36,
@@ -335,7 +335,7 @@ const questionsData = [
   },
   {
     "id": 34,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-24",
     "score": 36,
@@ -345,7 +345,7 @@ const questionsData = [
   },
   {
     "id": 35,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-25",
     "score": 36,
@@ -355,7 +355,7 @@ const questionsData = [
   },
   {
     "id": 36,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-26",
     "score": 36,
@@ -365,7 +365,7 @@ const questionsData = [
   },
   {
     "id": 37,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-27",
     "score": 36,
@@ -375,7 +375,7 @@ const questionsData = [
   },
   {
     "id": 38,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-28",
     "score": 36,
@@ -385,7 +385,7 @@ const questionsData = [
   },
   {
     "id": 39,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-29",
     "score": 36,
@@ -395,7 +395,7 @@ const questionsData = [
   },
   {
     "id": 40,
-    "subject": "刑事诉讼法",
+    "subject": "刑诉法",
     "type": "每日练习",
     "title": "左宁每日一题-30",
     "score": 36,
