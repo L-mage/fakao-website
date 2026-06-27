@@ -251,9 +251,12 @@ function bindEvents(){
   dom.feedbackSubjects.addEventListener('click',e=>{const c=e.target.closest('.chip');if(c)c.classList.toggle('active');});
   dom.feedbackPhases.addEventListener('click',e=>{const c=e.target.closest('.chip');if(c){dom.feedbackPhases.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');}});
   dom.feedbackConfirm.addEventListener('click',confirmFeedback);
-  dom.navLinks.addEventListener('click',e=>{const b=e.target.closest('.nav-btn[data-module]');if(b)switchModule(b.dataset.module);});
+  dom.navLinks.addEventListener('click',e=>{
+    const b=e.target.closest('.nav-btn[data-module]');if(!b)return;
+    if(b.dataset.module==='admin'){if(st.tenant!=='manager'){alert('请以管理者身份登录');return;}openAdmin();return;}
+    switchModule(b.dataset.module);
+  });
   dom.hamburgerBtn.addEventListener('click',()=>dom.navLinks.classList.toggle('open'));
-  dom.adminToggle.addEventListener('click',openAdmin);
   dom.adminClose.addEventListener('click',closeAdmin);
   dom.adminOverlay.addEventListener('click',e=>{if(e.target===dom.adminOverlay)closeAdmin();});
   dom.loginSwitch.addEventListener('click',()=>{st=freshState(null);document.querySelectorAll('.fullscreen-overlay').forEach(o=>o.classList.add('hidden'));dom.loginLearner.classList.remove('hidden');dom.loginManager.classList.remove('hidden');dom.studentLoginArea.classList.add('hidden');dom.managerPwdArea.classList.add('hidden');dom.loginError.classList.add('hidden');dom.studentLoginError.classList.add('hidden');dom.studentIdInput.value='';dom.studentPwdInput.value='';showLogin();});
