@@ -108,10 +108,16 @@ function hideAnswerPwd(){dom.answerPwdModal.classList.add('hidden');puid=null;}
 function confirmAnswerPwd(){const p=dom.answerPwdInput.value.trim();const c=getPwdFor(puid);if(p===c){st.unlocked.add(puid);saveLS();hideAnswerPwd();renderPractice();renderProvision();}else{dom.answerPwdError.classList.remove('hidden');dom.answerPwdInput.value='';dom.answerPwdInput.focus();}}
 
 // ============ ADMIN OVERLAY ============
-function openAdmin(){if(st.tenant!=='manager'){alert('请以管理者身份登录');return;}
+function openAdmin(){
+  if(st.tenant!=='manager'){alert('请以管理者身份登录');return;}
+  // Force display
+  dom.adminOverlay.classList.remove('hidden');
+  dom.adminOverlay.style.display='flex';
+
   dom.adminViewStudent.textContent=st.studentId||'管理者';
-  // Passwords
-  const pq=st.practiceDrawn.map(id=>getAllPool().find(q=>q.id===id)).filter(Boolean);
+  // Refresh passwords from current state
+  const allPool=getAllPool();
+  const pq=st.practiceDrawn.map(id=>allPool.find(q=>q.id===id)).filter(Boolean);
   dom.adminPracticePasswords.innerHTML=pq.length?pq.map(q=>`<div class="pwd-row"><span>${q.title||'题'}（${q.subject}·${q.type}）</span><span class="pwd-code">${getPwdFor(q.id)}</span></div>`).join(''):'<p class="empty-hint">今日未抽题</p>';
   const pv=st.provisionDrawn.map(id=>provisionData.find(q=>q.id===id)).filter(Boolean);
   dom.adminProvisionPasswords.innerHTML=pv.length?pv.map(q=>`<div class="pwd-row"><span>法条定位题</span><span class="pwd-code">${getPwdFor(q.id)}</span></div>`).join(''):'<p class="empty-hint">今日未抽题</p>';
@@ -119,10 +125,15 @@ function openAdmin(){if(st.tenant!=='manager'){alert('请以管理者身份登�
   renderStudentList();renderStats();
   // Show accounts tab by default
   dom.adminTabs.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
-  dom.adminTabs.querySelector('[data-admin="accounts"]').classList.add('active');
+  const firstTab=dom.adminTabs.querySelector('[data-admin="accounts"]');
+  if(firstTab)firstTab.classList.add('active');
   dom.adminBody.querySelectorAll('.admin-body-section').forEach(s=>s.classList.add('hidden'));
-  dom.adminBody.querySelector('#admin-section-accounts').classList.remove('hidden');
-  dom.adminOverlay.classList.remove('hidden');
+  const firstSection=dom.adminBody.querySelector('#admin-section-accounts');
+  if(firstSection)firstSection.classList.remove('hidden');
+}
+function closeAdmin(){
+  dom.adminOverlay.style.display='';
+  dom.adminOverlay.classList.add('hidden');
 }
 function closeAdmin(){dom.adminOverlay.classList.add('hidden');}
 
